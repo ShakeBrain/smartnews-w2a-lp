@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SmartNews W2A LP Prototypes — 2026-08-05</title>
+<link rel="stylesheet" href="_shared.css">
+<style>
+  body { padding: 20px; background: var(--sn-off-white); }
+  .index-wrap { max-width: 720px; margin: 0 auto; }
+  h1 { font-size: 28px; margin-bottom: 8px; }
+  .intro { color: var(--sn-gray); margin-bottom: 24px; font-size: 14px; }
+  .lp-list { display: flex; flex-direction: column; gap: 14px; }
+  .lp-item {
+    padding: 20px; background: var(--sn-white); border-radius: var(--radius);
+    border: 1px solid var(--sn-gray-light); text-decoration: none; color: inherit;
+    display: block; transition: all 0.15s ease;
+  }
+  .lp-item:hover { border-color: var(--sn-ink); transform: translateX(2px); }
+  .lp-item .head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 6px;
+  }
+  .lp-item .head h3 { font-size: 18px; }
+  .lp-item .arch {
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em;
+    color: var(--sn-gray); font-weight: 700;
+  }
+  .lp-item .meta { font-size: 13px; color: var(--sn-gray); }
+  .lp-item .stats {
+    display: flex; gap: 12px; margin-top: 8px;
+    font-size: 12px; color: var(--sn-ink);
+  }
+  .lp-item .stat {
+    padding: 3px 8px; background: var(--sn-off-white);
+    border-radius: 6px; font-weight: 600;
+  }
+</style>
+</head>
+<body>
+<div class="index-wrap">
+  <h1>SmartNews W2A LP プロトタイプ</h1>
+  <p class="intro">
+    2026-08-05 更新。金曜先方打ち合わせ用。<br>
+    <b>アセット</b>: 公式ロゴ (Brand Kit) / App Store 公式スクショ (itunes.apple.com/lookup) / DM Sans + DM Serif Text (Google Fonts, brand 指定).<br>
+    <b>Color</b>: theme1.xml から抽出した公式 palette (ink #262A48, red #FD4749, mint #00CC8B, blue #329FE7, orange #FB9200).<br>
+    <b>記事セクション</b>: <a href="https://docs.google.com/spreadsheets/d/1cBwvf7KP2Y6rj0ybszNZ3jQX0uknWMQDzqWqg3QpWKQ/edit">Google Sheet</a> の各タブから gviz CSV 経由で fetch (mock は fallback、Sheet 編集で即反映).<br>
+    <b>推奨閲覧</b>: <code>python3 -m http.server 8765</code> で local server 経由推奨 (file:// では fetch が CORS で落ちる場合あり).
+  </p>
+
+  <div class="lp-list">
+    <a class="lp-item" href="gardening.html">
+      <div class="head"><h3>🌱 Gardening</h3><span class="arch">Topic Hub</span></div>
+      <div class="meta">Dig into top garden tips. — 実 BEST asset copy 使用</div>
+      <div class="stats">
+        <span class="stat">30d spend $2.7K</span>
+        <span class="stat">D1 Rate 47%</span>
+        <span class="stat">検索需要: 大</span>
+      </div>
+    </a>
+
+    <a class="lp-item" href="fantasy-football.html">
+      <div class="head"><h3>🏈 Fantasy Football</h3><span class="arch">Topic Hub (sports)</span></div>
+      <div class="meta">Win your league with SmartNews. — 実 BEST asset copy 使用</div>
+      <div class="stats">
+        <span class="stat">30d spend $5.2K (3 groups合計)</span>
+        <span class="stat">D1 Rate 48%</span>
+        <span class="stat">検索需要: 極大 (シーズン開幕)</span>
+      </div>
+    </a>
+
+    <a class="lp-item" href="celebrity-gossip.html">
+      <div class="head"><h3>✨ Celebrity Gossip</h3><span class="arch">Topic Hub (entertainment)</span></div>
+      <div class="meta">Never miss a beat. — D1R 79% トップ retention</div>
+      <div class="stats">
+        <span class="stat">30d spend $3.7K</span>
+        <span class="stat">D1 Rate 79%</span>
+        <span class="stat">検索需要: 極大</span>
+      </div>
+    </a>
+
+    <a class="lp-item" href="coffee.html">
+      <div class="head"><h3>☕ Coffee</h3><span class="arch">Topic Hub (lifestyle)</span></div>
+      <div class="meta">Stay ahead of the latest coffee research. — 実 BEST asset copy 使用</div>
+      <div class="stats">
+        <span class="stat">30d spend $3.5K</span>
+        <span class="stat">D1 Rate 37%</span>
+        <span class="stat">検索需要: 中-大</span>
+      </div>
+    </a>
+
+    <a class="lp-item" href="politics.html">
+      <div class="head"><h3>🇺🇸 Politics · Diverse Perspectives</h3><span class="arch">USP 訴求型 (別 archetype)</span></div>
+      <div class="meta">Stop reading news that only tells you one side. — 差別化 USP を全面</div>
+      <div class="stats">
+        <span class="stat">30d spend $25K</span>
+        <span class="stat">D1 Rate 25-40%</span>
+        <span class="stat">アルゴリズムバブル訴求</span>
+      </div>
+    </a>
+  </div>
+
+  <hr style="margin: 32px 0; border: none; border-top: 1px solid var(--sn-gray-light);">
+
+  <h2 style="font-size: 20px; margin-bottom: 8px;">構成メモ</h2>
+  <ul style="padding-left: 20px; color: var(--sn-gray); font-size: 14px; line-height: 1.7;">
+    <li><b>Topic Hub 型 (4本)</b>: 同一テンプレ、カテゴリ差異は色 / 見出し / サンプル記事 / FAQ / publishers のみ。data JSON 化すれば残り 10-15 sub-topic は自動生成可能</li>
+    <li><b>Diverse Perspectives 型 (1本)</b>: politics 専用、"Left/Center/Right" 3列レイアウトで USP を可視化</li>
+    <li><b>共通</b>: _shared.css / mobile-first / App Store &amp; Google Play ボタン (Adjust deep link に差し替え想定) / rating・publisher・FAQ ブロック</li>
+    <li><b>コピーソース</b>: Google Ads UAC の <code>performance_label=BEST</code> asset をそのまま流用 (勝ってる言葉)</li>
+    <li><b>実装工数</b>: テンプレ化 (Astro) すれば 1 カテゴリあたり <b>2-4時間</b> (data JSON 記述 + 画像用意 + 動作確認)</li>
+  </ul>
+</div>
+</body>
+</html>
