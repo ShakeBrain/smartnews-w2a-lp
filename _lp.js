@@ -90,8 +90,8 @@ function _rowsToObjects(rows) {
 }
 
 function _renderArticles(articles, listEl) {
-  // 記事タップも install 導線 (Adjust URL) にする。元の記事 URL には遷移させない
-  // = W2A LP の目的は install であって記事閲覧ではない (記事は install 動機付けの material)
+  // 記事タップも install 導線 (Adjust URL) にする。card 内に explicit CTA を置くことで
+  // "install しないと記事は読めない" 期待値を明示 (bait-and-switch UX 防止)
   const installHref = _installUrl();
   const html = articles.map(a => {
     const thumb = a.image_url
@@ -104,6 +104,7 @@ function _renderArticles(articles, listEl) {
         <div class="src">${_esc(a.source)}</div>
         <div class="title">${_esc(a.title)}</div>
         <div class="meta">${_esc(a.published_ago)}</div>
+        <span class="article-cta">Install now to read →</span>
       </div>
     </a>
   `;
