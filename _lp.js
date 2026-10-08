@@ -36,8 +36,8 @@ function _installUrl() {
 
 function _swapInstallCtas() {
   const url = _installUrl();
-  // .store-btn.primary (hero / bottom CTA) + .nav-cta (top bar)
-  const targets = document.querySelectorAll('a.store-btn.primary, a.nav-cta');
+  // .store-btn.primary (hero / bottom CTA) + .nav-cta (top bar) + .follow-cta (per-district / per-item install)
+  const targets = document.querySelectorAll('a.store-btn.primary, a.nav-cta, a.follow-cta');
   targets.forEach(a => {
     a.href = url;
     a.setAttribute('rel', 'noopener');

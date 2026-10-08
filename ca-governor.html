@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SmartNews: Follow the 2026 California Governor Race — Becerra vs. Hilton</title>
+<meta name="description" content="Side-by-side, fact-based comparison of Xavier Becerra (D) and Steve Hilton (R) in the 2026 California gubernatorial election. Nonpartisan voter resource from SmartNews.">
+<link rel="stylesheet" href="_shared.css">
+<style>
+  :root { --topic-primary: #262A48; --topic-secondary: #329FE7; }
+  .hero { background: linear-gradient(180deg, #EEF4FA 0%, #FFFFFF 100%); }
+  .hero .badge { background: rgba(50, 159, 231, 0.14); color: #1A5A8A; }
+
+  /* Candidate cards (hero) */
+  .candidate-cards {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+    max-width: 460px; margin: 28px auto 0;
+  }
+  .cc {
+    background: var(--sn-white);
+    border: 1px solid var(--sn-gray-light);
+    border-radius: var(--radius);
+    padding: 16px 14px; text-align: left; position: relative;
+    box-shadow: var(--shadow-sm);
+  }
+  .cc.dem { border-top: 3px solid #2563EB; }
+  .cc.rep { border-top: 3px solid #DC2626; }
+  .cc .avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 17px; color: #fff; margin-bottom: 10px;
+    font-family: "DM Serif Text", serif;
+  }
+  .cc.dem .avatar { background: #2563EB; }
+  .cc.rep .avatar { background: #DC2626; }
+  .cc .party {
+    display: inline-block; font-size: 10px; font-weight: 600;
+    padding: 2px 7px; border-radius: 999px; margin-bottom: 4px;
+    letter-spacing: 0.03em; text-transform: uppercase;
+  }
+  .cc.dem .party { background: #DBEAFE; color: #1E40AF; }
+  .cc.rep .party { background: #FEE2E2; color: #991B1B; }
+  .cc .name {
+    font-family: "DM Serif Text", serif; font-size: 17px; font-weight: 400;
+    line-height: 1.15; margin-bottom: 3px; letter-spacing: -0.01em;
+  }
+  .cc .role { font-size: 11px; color: var(--sn-ink); opacity: 0.6; line-height: 1.35; }
+  .countdown {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--sn-white); border: 1px solid var(--sn-gray-light);
+    padding: 8px 14px; border-radius: 999px; font-size: 13px;
+    margin-top: 10px;
+  }
+  .countdown strong { color: var(--sn-ink); font-weight: 600; }
+  .countdown .sep { color: var(--sn-ink); opacity: 0.4; }
+
+  /* Issue section */
+  .issue { padding: 32px 24px; border-top: 1px solid var(--sn-gray-light); }
+  .issue:first-of-type { border-top: none; }
+  .issue-num {
+    font-size: 11px; color: var(--sn-ink); opacity: 0.5;
+    text-transform: uppercase; letter-spacing: 0.08em; font-weight: 500;
+    margin-bottom: 6px;
+  }
+  .issue h2 {
+    font-family: "DM Serif Text", Georgia, serif;
+    font-size: 26px; font-weight: 400; letter-spacing: -0.01em; margin-bottom: 10px;
+    line-height: 1.15;
+  }
+  .issue-context {
+    font-size: 14px; color: var(--sn-ink); opacity: 0.72; line-height: 1.6;
+    margin-bottom: 20px;
+  }
+
+  /* Spectrum visualization */
+  .spectrum {
+    background: var(--sn-surface);
+    border-radius: var(--radius);
+    padding: 20px 18px 18px;
+    margin-bottom: 14px;
+  }
+  .spectrum-labels {
+    display: flex; justify-content: space-between;
+    font-size: 10px; color: var(--sn-ink); opacity: 0.55;
+    text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600;
+    margin-bottom: 12px;
+  }
+  .spectrum-track {
+    position: relative; height: 6px;
+    background: linear-gradient(to right, #DBEAFE 0%, #F1F5F9 50%, #FEE2E2 100%);
+    border-radius: 999px; margin-bottom: 32px;
+  }
+  .spectrum-dot {
+    position: absolute; top: 50%;
+    width: 22px; height: 22px; border-radius: 50%;
+    transform: translate(-50%, -50%);
+    border: 3px solid #fff;
+    box-shadow: 0 2px 6px rgba(38,42,72,0.15);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 9px; font-weight: 700; color: #fff;
+    font-family: "DM Serif Text", serif;
+  }
+  .spectrum-dot.dem { background: #2563EB; }
+  .spectrum-dot.rep { background: #DC2626; }
+  .spectrum-dot .lbl {
+    position: absolute; top: 26px; left: 50%; transform: translateX(-50%);
+    font-size: 10px; font-weight: 600;
+    color: var(--sn-ink); opacity: 0.75;
+    white-space: nowrap; font-family: "DM Sans", sans-serif;
+  }
+  .spectrum-dist {
+    text-align: center; font-size: 12px; color: var(--sn-ink); opacity: 0.65;
+  }
+  .spectrum-dist strong { color: var(--sn-ink); font-weight: 700; opacity: 1; }
+
+  /* Position cards (dem/rep side-by-side) */
+  .positions {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+  }
+  .pos {
+    background: var(--sn-surface); border-radius: var(--radius);
+    padding: 14px 14px; font-size: 13px; line-height: 1.55;
+  }
+  .pos.dem { border-left: 3px solid #2563EB; }
+  .pos.rep { border-left: 3px solid #DC2626; }
+  .pos .pname {
+    font-size: 10px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.05em; margin-bottom: 6px;
+  }
+  .pos.dem .pname { color: #1E40AF; }
+  .pos.rep .pname { color: #991B1B; }
+  .pos p { color: var(--sn-ink); margin-bottom: 6px; }
+  .pos .src { font-size: 10px; color: var(--sn-ink); opacity: 0.5; }
+  .pos .src a {
+    color: inherit; text-decoration: underline;
+    text-decoration-color: var(--sn-gray-light); text-underline-offset: 2px;
+  }
+
+  @media (max-width: 520px) {
+    .positions { grid-template-columns: 1fr; }
+  }
+
+  /* Issue nav rail */
+  .nav-rail {
+    display: flex; gap: 6px; overflow-x: auto;
+    padding: 12px 24px 16px;
+    scrollbar-width: thin;
+  }
+  .nav-rail::-webkit-scrollbar { height: 0; }
+  .nav-rail a {
+    flex-shrink: 0; padding: 7px 13px; background: var(--sn-white);
+    border: 1px solid var(--sn-gray-light); border-radius: 999px;
+    font-size: 13px; color: var(--sn-ink); opacity: 0.75;
+    text-decoration: none; font-weight: 500;
+  }
+
+  /* Nonpartisan disclosure */
+  .nonpartisan {
+    background: var(--sn-surface); padding: 16px 18px;
+    border-radius: var(--radius); font-size: 13px;
+    color: var(--sn-ink); opacity: 0.75; line-height: 1.55;
+    margin: 24px;
+  }
+  .nonpartisan strong { color: var(--sn-ink); opacity: 1; font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <nav class="nav">
+    <div class="logo-row">
+      <img src="assets/smartnews-logo-horizontal.png" alt="SmartNews">
+    </div>
+    <a href="#install" class="nav-cta">Get the app</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="badge">🗳️ 2026 CA Governor</div>
+    <h1>Becerra vs. Hilton,<br>side by side.</h1>
+    <p class="sub">California's first open-seat governor race in 16 years. Here's where each candidate stands on the biggest issues — in their own words, with sources. Nonpartisan.</p>
+    <div class="cta-row">
+      <a href="#install" class="store-btn primary">Get SmartNews — Free</a>
+    </div>
+    <p style="font-size:12px;color:var(--sn-ink);opacity:0.55;margin-top:10px;">Follow the race · Debate alerts · Poll updates · iOS &amp; Android</p>
+    <div class="countdown">
+      <strong>Nov 3, 2026</strong><span class="sep">·</span><span>Election day</span>
+    </div>
+
+    <!-- CANDIDATE CARDS -->
+    <div class="candidate-cards">
+      <div class="cc dem">
+        <div class="avatar">XB</div>
+        <div class="party">Democrat</div>
+        <div class="name">Xavier Becerra</div>
+        <div class="role">Former U.S. HHS Secretary · Former CA Attorney General</div>
+      </div>
+      <div class="cc rep">
+        <div class="avatar">SH</div>
+        <div class="party">Republican</div>
+        <div class="name">Steve Hilton</div>
+        <div class="role">Former Fox News host · Founder, Golden Together</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Issue nav -->
+  <nav class="nav-rail" aria-label="Issues">
+    <a href="#housing">Housing</a>
+    <a href="#homelessness">Homelessness</a>
+    <a href="#taxes">Taxes</a>
+    <a href="#climate">Climate</a>
+    <a href="#immigration">Immigration</a>
+    <a href="#crime">Crime</a>
+    <a href="#education">Education</a>
+  </nav>
+
+  <!-- ISSUE 1: HOUSING -->
+  <section class="issue" id="housing">
+    <div class="issue-num">Issue 01</div>
+    <h2>Housing</h2>
+    <p class="issue-context">California is short roughly 2.5 million homes. Both candidates agree supply must grow — but they split on dense urban housing vs. suburban starter homes, and on how aggressively to override local control.</p>
+    <div class="spectrum">
+      <div class="spectrum-labels"><span>Dense &amp; State-Driven</span><span>Suburban &amp; Deregulate</span></div>
+      <div class="spectrum-track">
+        <div class="spectrum-dot dem" style="left: 25%"><span>XB</span><span class="lbl">Becerra</span></div>
+        <div class="spectrum-dot rep" style="left: 78%"><span>SH</span><span class="lbl">Hilton</span></div>
+      </div>
+      <div class="spectrum-dist"><strong>53 pts apart</strong> on urban-density vs. suburban focus</div>
+    </div>
+    <div class="positions">
+      <div class="pos dem">
+        <div class="pname">Becerra (D)</div>
+        <p>Declare housing state of emergency on day 1. Unstick 40,000 homes stalled in funding. Build 1.5–2 million homes in first term. Push cities to zone for apartments/duplexes/condos; crack down on cities that block new housing.</p>
+        <div class="src">Source: <a href="https://therealdeal.com/la/2026/10/01/ca-governor-candidates-debate-housing-data-center-projects/">The Real Deal</a>, <a href="https://www.xavierbecerra2026.com/">campaign</a></div>
+      </div>
+      <div class="pos rep">
+        <div class="pname">Hilton (R)</div>
+        <p>"Bring back the starter home." Cap government fees on new homes at $50K. Block CEQA lawsuits used to stop construction. Prefer suburban over dense city apartments. State loan program for first-time buyers.</p>
+        <div class="src">Source: <a href="https://therealdeal.com/la/2026/10/01/ca-governor-candidates-debate-housing-data-center-projects/">The Real Deal</a>, <a href="https://calmatters.org/california-voter-guide-2026/governor/">CalMatters</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ISSUE 2: HOMELESSNESS -->
+  <section class="issue" id="homelessness">
+    <div class="issue-num">Issue 02</div>
+    <h2>Homelessness</h2>
+    <p class="issue-context">California has roughly 180,000 unhoused people — the largest total in the U.S. The debate: prevention and services, or enforcement and treatment mandates.</p>
+    <div class="spectrum">
+      <div class="spectrum-labels"><span>Prevent &amp; Treat</span><span>Enforce &amp; Mandate</span></div>
+      <div class="spectrum-track">
+        <div class="spectrum-dot dem" style="left: 32%"><span>XB</span><span class="lbl">Becerra</span></div>
+        <div class="spectrum-dot rep" style="left: 65%"><span>SH</span><span class="lbl">Hilton</span></div>
+      </div>
+      <div class="spectrum-dist"><strong>33 pts apart</strong> on enforcement vs. prevention</div>
+    </div>
+    <div class="positions">
+      <div class="pos dem">
+        <div class="pname">Becerra (D)</div>
+        <p>Clear encampments and hold local governments accountable, while investing in mental health and substance use treatment. Prevention-first: "cheaper to help Californians stay housed than help them off the street." Won't criminalize sleeping outside.</p>
+        <div class="src">Source: <a href="https://calmatters.org/politics/2026/05/ca-governor-candidates-homelessness/">CalMatters</a></div>
+      </div>
+      <div class="pos rep">
+        <div class="pname">Hilton (R)</div>
+        <p>"Status quo is not working." Favors enforcement, reversing decarceration, mandating treatment for addiction and mental illness. Has not released a detailed plan.</p>
+        <div class="src">Source: <a href="https://calmatters.org/politics/2026/05/ca-governor-candidates-homelessness/">CalMatters</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ISSUE 3: TAXES -->
+  <section class="issue" id="taxes">
+    <div class="issue-num">Issue 03</div>
+    <h2>Taxes</h2>
+    <p class="issue-context">California has the nation's highest top-marginal income tax (13.3%). Candidates split on preserving the progressive structure or cutting and flattening it.</p>
+    <div class="spectrum">
+      <div class="spectrum-labels"><span>Progressive &amp; Expand</span><span>Cut &amp; Flatten</span></div>
+      <div class="spectrum-track">
+        <div class="spectrum-dot dem" style="left: 20%"><span>XB</span><span class="lbl">Becerra</span></div>
+        <div class="spectrum-dot rep" style="left: 85%"><span>SH</span><span class="lbl">Hilton</span></div>
+      </div>
+      <div class="spectrum-dist"><strong>65 pts apart</strong> on tax structure</div>
+    </div>
+    <div class="positions">
+      <div class="pos dem">
+        <div class="pname">Becerra (D)</div>
+        <p>Preserve California's progressive income tax. Supports extending the higher rate on high earners to pay for schools. Use the tax base to defend state services from federal cuts.</p>
+        <div class="src">Source: <a href="https://www.cnn.com/2026/09/30/politics/live-news/california-governor-debate-midterms">CNN debate</a></div>
+      </div>
+      <div class="pos rep">
+        <div class="pname">Hilton (R)</div>
+        <p>Eliminate state income tax on the first $150,000 of earnings. Flat rate above that threshold. Promises broader fiscal consolidation.</p>
+        <div class="src">Source: <a href="https://www.cnn.com/2026/09/30/politics/live-news/california-governor-debate-midterms">CNN debate</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ISSUE 4: CLIMATE -->
+  <section class="issue" id="climate">
+    <div class="issue-num">Issue 04</div>
+    <h2>Climate &amp; Energy</h2>
+    <p class="issue-context">California's 2035 gas-car ban and clean energy mandates are among the most aggressive in the U.S. Preserve, pragmatically adjust, or roll back?</p>
+    <div class="spectrum">
+      <div class="spectrum-labels"><span>Keep Mandates</span><span>Roll Back</span></div>
+      <div class="spectrum-track">
+        <div class="spectrum-dot dem" style="left: 30%"><span>XB</span><span class="lbl">Becerra</span></div>
+        <div class="spectrum-dot rep" style="left: 88%"><span>SH</span><span class="lbl">Hilton</span></div>
+      </div>
+      <div class="spectrum-dist"><strong>58 pts apart</strong> on climate policy direction</div>
+    </div>
+    <div class="positions">
+      <div class="pos dem">
+        <div class="pname">Becerra (D)</div>
+        <p>Supports the clean energy transition, but open to revising goals if they make energy unaffordable — including Newsom's 2035 gas-car ban. Pragmatic preservation of the climate framework.</p>
+        <div class="src">Source: <a href="https://calmatters.org/california-voter-guide-2026/governor/">CalMatters</a></div>
+      </div>
+      <div class="pos rep">
+        <div class="pname">Hilton (R)</div>
+        <p>Roll back clean energy and GHG rules. Favor consumer-friendly policies. Boost oil drilling. Slash environmental regulations.</p>
+        <div class="src">Source: <a href="https://calmatters.org/california-voter-guide-2026/governor/">CalMatters</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ISSUE 5: IMMIGRATION -->
+  <section class="issue" id="immigration">
+    <div class="issue-num">Issue 05</div>
+    <h2>Immigration</h2>
+    <p class="issue-context">California's sanctuary law bars most state cooperation with federal immigration enforcement. The Trump administration has challenged it. Candidates differ sharply on whether to defend or dismantle it.</p>
+    <div class="spectrum">
+      <div class="spectrum-labels"><span>Defend Sanctuary</span><span>Comply with ICE</span></div>
+      <div class="spectrum-track">
+        <div class="spectrum-dot dem" style="left: 12%"><span>XB</span><span class="lbl">Becerra</span></div>
+        <div class="spectrum-dot rep" style="left: 92%"><span>SH</span><span class="lbl">Hilton</span></div>
+      </div>
+      <div class="spectrum-dist"><strong>80 pts apart</strong> — the sharpest contrast of this race</div>
+    </div>
+    <div class="positions">
+      <div class="pos dem">
+        <div class="pname">Becerra (D)</div>
+        <p>Defend California's sanctuary law. Refuse to help ICE with civil immigration enforcement. Fight Trump in court — building on his AG tenure when he sued the first Trump administration ~100 times.</p>
+        <div class="src">Source: <a href="https://calmatters.org/politics/2026/09/california-general-election-gubernatorial-debate-cnn/">CalMatters</a></div>
+      </div>
+      <div class="pos rep">
+        <div class="pname">Hilton (R)</div>
+        <p>Cooperate with federal immigration enforcement. Treat sanctuary law as unconstitutional. Back Trump's approach. Favor deportation enforcement and state-federal alignment.</p>
+        <div class="src">Source: <a href="https://www.cnn.com/2026/09/30/politics/live-news/california-governor-debate-midterms">CNN debate</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ISSUE 6: CRIME -->
+  <section class="issue" id="crime">
+    <div class="issue-num">Issue 06</div>
+    <h2>Crime &amp; Public Safety</h2>
+    <p class="issue-context">Voters passed Prop 36 in 2024 to roll back some soft-on-crime provisions. The debate now: how aggressively to enforce vs. how to prevent and treat the underlying drivers.</p>
+    <div class="spectrum">
+      <div class="spectrum-labels"><span>Prevent &amp; Treat</span><span>Enforce &amp; Punish</span></div>
+      <div class="spectrum-track">
+        <div class="spectrum-dot dem" style="left: 38%"><span>XB</span><span class="lbl">Becerra</span></div>
+        <div class="spectrum-dot rep" style="left: 78%"><span>SH</span><span class="lbl">Hilton</span></div>
+      </div>
+      <div class="spectrum-dist"><strong>40 pts apart</strong> on enforcement intensity</div>
+    </div>
+    <div class="positions">
+      <div class="pos dem">
+        <div class="pname">Becerra (D)</div>
+        <p>Voted for Prop 36 and would fully fund its provisions. Ensure defendants get court-mandated drug treatment to avoid jail. Treats crime and addiction as problems to prevent and treat first.</p>
+        <div class="src">Source: <a href="https://calmatters.org/california-voter-guide-2026/governor/">CalMatters</a></div>
+      </div>
+      <div class="pos rep">
+        <div class="pname">Hilton (R)</div>
+        <p>Enforce existing laws. Reverse decarceration policies of the past decade. Require treatment for addiction and mental illness. Enforcement as primary deterrent.</p>
+        <div class="src">Source: <a href="https://calmatters.org/california-voter-guide-2026/governor/">CalMatters</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ISSUE 7: EDUCATION -->
+  <section class="issue" id="education">
+    <div class="issue-num">Issue 07</div>
+    <h2>Education</h2>
+    <p class="issue-context">California's K-12 scores lag national averages on reading and math. Affordability + public school focus vs. structural reforms including charters and vouchers.</p>
+    <div class="spectrum">
+      <div class="spectrum-labels"><span>Public School &amp; Affordability</span><span>Charter / Voucher</span></div>
+      <div class="spectrum-track">
+        <div class="spectrum-dot dem" style="left: 18%"><span>XB</span><span class="lbl">Becerra</span></div>
+        <div class="spectrum-dot rep" style="left: 82%"><span>SH</span><span class="lbl">Hilton</span></div>
+      </div>
+      <div class="spectrum-dist"><strong>64 pts apart</strong> on school choice</div>
+    </div>
+    <div class="positions">
+      <div class="pos dem">
+        <div class="pname">Becerra (D)</div>
+        <p>Long pro-public-school, anti-voucher record. Treats education mainly as an affordability issue — expand childcare support and workforce training. No major K-12 policy proposals specific to this race.</p>
+        <div class="src">Source: <a href="https://edsource.org/2026/california-debate-becerra-hilton-education/767280">EdSource</a></div>
+      </div>
+      <div class="pos rep">
+        <div class="pname">Hilton (R)</div>
+        <p>Mandate phonics. Hold back 3rd graders not reading at grade level. Make it easier for districts to fire teachers and for parents to petition to convert schools to charters. Public funds for vouchers.</p>
+        <div class="src">Source: <a href="https://edsource.org/2026/california-debate-becerra-hilton-education/767280">EdSource</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Phone showcase -->
+  <section class="phone-showcase">
+    <div class="kicker">SmartNews on your phone</div>
+    <h2>Follow the race in real time.</h2>
+    <div class="phone-frame">
+      <img src="https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/0a/8c/86/0a8c8611-b187-2cdc-6beb-5152eaba5fa6/052626_ASO_Frame3_v2_GR_1242x2208.jpg/828x1792bb.png" alt="SmartNews app screenshot">
+    </div>
+    <p class="caption">Debate alerts · Poll updates · Candidate news. iOS &amp; Android.</p>
+  </section>
+
+  <!-- LIVE ARTICLES (California stories) -->
+  <section class="section">
+    <div class="kicker">What's happening today</div>
+    <h2>Live from California.</h2>
+    <p class="lead">Actual stories you'll see in your SmartNews California channel today.</p>
+    <div class="article-list">
+      <a class="article" href="#install">
+        <div class="thumb">🏛️</div>
+        <div class="body">
+          <div class="src">CalMatters</div>
+          <div class="title">Becerra and Hilton clash on immigration, taxes in heated CNN governor debate</div>
+          <div class="meta">6 hours ago · 7 min read</div>
+          <span class="article-cta">Install now to read →</span>
+        </div>
+      </a>
+      <a class="article" href="#install">
+        <div class="thumb">📊</div>
+        <div class="body">
+          <div class="src">Politico California</div>
+          <div class="title">New Berkeley IGS poll: Becerra leads Hilton 58–33 with four weeks to go</div>
+          <div class="meta">Yesterday · 4 min read</div>
+          <span class="article-cta">Install now to read →</span>
+        </div>
+      </a>
+      <a class="article" href="#install">
+        <div class="thumb">🏘️</div>
+        <div class="body">
+          <div class="src">The Real Deal</div>
+          <div class="title">Housing debate reveals starkly different visions for California's 2.5M-home gap</div>
+          <div class="meta">2 days ago · 6 min read</div>
+          <span class="article-cta">Install now to read →</span>
+        </div>
+      </a>
+      <a class="article" href="#install">
+        <div class="thumb">🗳️</div>
+        <div class="body">
+          <div class="src">LA Times</div>
+          <div class="title">14 propositions on the November ballot: a California voter's cheat sheet</div>
+          <div class="meta">3 days ago · 9 min read</div>
+          <span class="article-cta">Install now to read →</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- VALUE PROPS -->
+  <section class="section" style="background: var(--sn-surface);">
+    <div class="kicker">Built for engaged voters</div>
+    <h2>Everything you need, nothing you don't.</h2>
+    <p class="lead">Nonpartisan context first, strong opinions second.</p>
+    <div class="value-grid">
+      <div class="value-card">
+        <div class="icon">🔔</div>
+        <h3>Debate &amp; poll alerts</h3>
+        <p>Push the moment a debate starts, a poll drops, or a race shifts. Set per-candidate follows.</p>
+      </div>
+      <div class="value-card">
+        <div class="icon">⚖️</div>
+        <h3>Nonpartisan context</h3>
+        <p>Multiple sources on every story, so you see left, right, and center on the same page.</p>
+      </div>
+      <div class="value-card">
+        <div class="icon">📋</div>
+        <h3>Your full ballot</h3>
+        <p>Governor, 52 House seats, state races, and 14 propositions — all in one place.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PUBLISHERS -->
+  <section class="section">
+    <div class="kicker">Sources we curate</div>
+    <h2>Every California voice, one feed.</h2>
+    <div class="publishers">
+      <div class="publisher">CalMatters</div>
+      <div class="publisher">LA Times</div>
+      <div class="publisher">SF Chronicle</div>
+      <div class="publisher">Politico California</div>
+      <div class="publisher">KQED</div>
+      <div class="publisher">LAist</div>
+      <div class="publisher">The Sacramento Bee</div>
+      <div class="publisher">EdSource</div>
+      <div class="publisher">Ballotpedia</div>
+      <div class="publisher">+ 40 more</div>
+    </div>
+  </section>
+
+  <!-- Nonpartisan disclosure -->
+  <div class="nonpartisan">
+    <strong>About this page:</strong> Nonpartisan, independently produced. Policy positions drawn from campaign statements, debate transcripts, and third-party reporting. We do not endorse any candidate. Spectrum positions are editorial estimates based on the cited statements. Last updated 2026-10-08.
+  </div>
+
+  <!-- FINAL CTA -->
+  <section id="install" class="cta-block">
+    <h2>Don't miss a moment of this race.</h2>
+    <p>Free forever. Install in 20 seconds.</p>
+    <div class="cta-row">
+      <a href="#install" class="store-btn primary">Get SmartNews — Free</a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>&copy; 2026 SmartNews, Inc. &nbsp;·&nbsp;
+      <a href="#">Privacy</a> &nbsp;·&nbsp;
+      <a href="#">Terms</a> &nbsp;·&nbsp;
+      <a href="#">All topics</a>
+    </p>
+  </footer>
+
+</div>
+<script src="_lp.js"></script>
+<script>fetchAndRender('ca-governor');</script>
+</body>
+</html>

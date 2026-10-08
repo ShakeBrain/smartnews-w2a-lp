@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SmartNews: California House Races 2026 — The 6 Districts That Could Decide Congress</title>
+<meta name="description" content="California has the most competitive House seats in the country for 2026. CA-13, CA-22, CA-27, CA-41, CA-48 — plus the Pelosi successor fight in CA-11. Nonpartisan voter resource.">
+<link rel="stylesheet" href="_shared.css">
+<style>
+  :root { --topic-primary: #262A48; --topic-secondary: #FD4749; }
+  .hero { background: linear-gradient(180deg, #FFF4E6 0%, #FFFFFF 100%); }
+  .hero .badge { background: rgba(251, 146, 0, 0.14); color: #B86500; }
+
+  /* Stakes row */
+  .stakes {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+    max-width: 480px; margin: 24px auto 0;
+  }
+  .stake {
+    background: var(--sn-white); border: 1px solid var(--sn-gray-light);
+    border-radius: var(--radius); padding: 14px 10px; text-align: center;
+    box-shadow: var(--shadow-sm);
+  }
+  .stake .num {
+    font-family: "DM Serif Text", serif;
+    font-size: 28px; line-height: 1; color: var(--sn-ink);
+    margin-bottom: 4px;
+  }
+  .stake .lbl {
+    font-size: 10px; color: var(--sn-ink); opacity: 0.65;
+    text-transform: uppercase; letter-spacing: 0.05em; font-weight: 500;
+    line-height: 1.3;
+  }
+
+  /* District card */
+  .district {
+    background: var(--sn-white);
+    border: 1px solid var(--sn-gray-light);
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    margin: 0 24px 14px;
+    box-shadow: var(--shadow-sm);
+  }
+  .district-head {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 4px;
+  }
+  .district-id {
+    font-family: "DM Serif Text", serif;
+    font-size: 22px; font-weight: 400; letter-spacing: -0.01em;
+    color: var(--sn-ink);
+  }
+  .rating-badge {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 4px 10px; border-radius: 999px; font-size: 10px;
+    font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
+  }
+  .rating-badge.tossup { background: #FEF3C7; color: #92400E; }
+  .rating-badge.lean-d { background: #DBEAFE; color: #1E40AF; }
+  .rating-badge.lean-r { background: #FEE2E2; color: #991B1B; }
+  .rating-badge.lean-d2 { background: #BFDBFE; color: #1E3A8A; }
+  .district-geo {
+    font-size: 12px; color: var(--sn-ink); opacity: 0.6;
+    margin-bottom: 16px;
+  }
+  .district-summary {
+    font-size: 13px; line-height: 1.55; color: var(--sn-ink);
+    opacity: 0.85; margin-bottom: 16px;
+  }
+  .district-summary strong { opacity: 1; font-weight: 600; }
+
+  /* Mini candidate pair */
+  .mini-pair {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+    margin-bottom: 14px;
+  }
+  .mini-cc {
+    background: var(--sn-surface); border-radius: var(--radius);
+    padding: 12px; display: flex; gap: 10px; align-items: flex-start;
+  }
+  .mini-cc.dem { border-left: 3px solid #2563EB; }
+  .mini-cc.rep { border-left: 3px solid #DC2626; }
+  .mini-cc .mavatar {
+    flex-shrink: 0;
+    width: 34px; height: 34px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 13px; color: #fff;
+    font-family: "DM Serif Text", serif;
+  }
+  .mini-cc.dem .mavatar { background: #2563EB; }
+  .mini-cc.rep .mavatar { background: #DC2626; }
+  .mini-cc .mbody { min-width: 0; }
+  .mini-cc .mparty {
+    font-size: 9px; font-weight: 700; letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .mini-cc.dem .mparty { color: #1E40AF; }
+  .mini-cc.rep .mparty { color: #991B1B; }
+  .mini-cc .mname {
+    font-size: 14px; font-weight: 600; line-height: 1.2; margin: 2px 0;
+    color: var(--sn-ink);
+  }
+  .mini-cc .mrole {
+    font-size: 11px; color: var(--sn-ink); opacity: 0.6; line-height: 1.3;
+  }
+
+  /* Facts list */
+  .facts {
+    display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px;
+  }
+  .fact {
+    background: var(--sn-surface); padding: 5px 10px;
+    border-radius: 999px; font-size: 11px; color: var(--sn-ink);
+    opacity: 0.85; font-weight: 500;
+  }
+  .fact strong { opacity: 1; font-weight: 700; }
+
+  /* District follow CTA */
+  .follow-cta {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 8px 14px; background: var(--sn-red); color: var(--sn-white);
+    border-radius: 999px; font-size: 12px; font-weight: 500;
+    text-decoration: none;
+  }
+
+  @media (max-width: 480px) {
+    .mini-pair { grid-template-columns: 1fr; }
+    .stakes { grid-template-columns: 1fr 1fr 1fr; }
+    .stake .num { font-size: 24px; }
+  }
+
+  /* Nonpartisan disclosure */
+  .nonpartisan {
+    background: var(--sn-surface); padding: 16px 18px;
+    border-radius: var(--radius); font-size: 13px;
+    color: var(--sn-ink); opacity: 0.75; line-height: 1.55;
+    margin: 32px 24px 0;
+  }
+  .nonpartisan strong { color: var(--sn-ink); opacity: 1; font-weight: 600; }
+
+  .section-intro {
+    padding: 24px;
+    text-align: left;
+  }
+  .section-intro .kicker {
+    font-size: 12px; color: var(--sn-ink); opacity: 0.55;
+    text-transform: uppercase; letter-spacing: 0.06em; font-weight: 500;
+    margin-bottom: 8px;
+  }
+  .section-intro h2 {
+    font-family: "DM Serif Text", Georgia, serif;
+    font-size: 26px; font-weight: 400; letter-spacing: -0.01em;
+    margin-bottom: 10px;
+  }
+  .section-intro .lead {
+    font-size: 15px; color: var(--sn-ink); opacity: 0.72;
+    line-height: 1.6;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <nav class="nav">
+    <div class="logo-row">
+      <img src="assets/smartnews-logo-horizontal.png" alt="SmartNews">
+    </div>
+    <a href="#install" class="nav-cta">Get the app</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="badge">🏛️ 2026 CA House</div>
+    <h1>6 California races<br>to watch in 2026.</h1>
+    <p class="sub">Proposition 50 redrew California's congressional map this year, shifting the partisan balance of several seats. These are the 6 races rated as competitive — among the most of any state. Nonpartisan.</p>
+    <div class="cta-row">
+      <a href="#install" class="store-btn primary">Get SmartNews — Free</a>
+    </div>
+    <p style="font-size:12px;color:var(--sn-ink);opacity:0.55;margin-top:10px;">Follow every race · Debate alerts · iOS &amp; Android</p>
+
+    <!-- Stakes row -->
+    <div class="stakes">
+      <div class="stake">
+        <div class="num">6</div>
+        <div class="lbl">Competitive<br>districts</div>
+      </div>
+      <div class="stake">
+        <div class="num">11</div>
+        <div class="lbl">Cook ratings<br>changed in CA</div>
+      </div>
+      <div class="stake">
+        <div class="num">4</div>
+        <div class="lbl">Weeks until<br>Nov 3 election</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTRO -->
+  <div class="section-intro">
+    <div class="kicker">Why California matters this cycle</div>
+    <h2>A new map, a reshuffled slate.</h2>
+    <p class="lead">Proposition 50, passed by California voters earlier this year, redrew the state's congressional map for the first time since 2020. Several districts shifted in partisan composition — making some previously safe seats competitive and reshaping how both parties approach the 2026 cycle. Cook Political Report has issued 11 ratings changes for California alone, more than any other state. The results could help determine which party holds the House in 2027.</p>
+  </div>
+
+  <!-- DISTRICT 1: CA-13 -->
+  <section class="district" id="ca-13">
+    <div class="district-head">
+      <div class="district-id">CA-13</div>
+      <span class="rating-badge lean-d">Lean Dem</span>
+    </div>
+    <div class="district-geo">Central Valley · Stockton, Modesto, Merced area</div>
+    <p class="district-summary">
+      <strong>The 2024 race here was decided by 187 votes</strong> — the narrowest House margin in the country. Democrat Adam Gray, the incumbent, faces Republican Kevin Lincoln, a former mayor of Stockton. Prop 50's redistricting moved Lincoln out of his previous district; he opted to run here.
+    </p>
+    <div class="mini-pair">
+      <div class="mini-cc dem">
+        <div class="mavatar">AG</div>
+        <div class="mbody">
+          <div class="mparty">Democrat (incumbent)</div>
+          <div class="mname">Adam Gray</div>
+          <div class="mrole">Former State Assembly member</div>
+        </div>
+      </div>
+      <div class="mini-cc rep">
+        <div class="mavatar">KL</div>
+        <div class="mbody">
+          <div class="mparty">Republican</div>
+          <div class="mname">Kevin Lincoln</div>
+          <div class="mrole">Former Mayor of Stockton; Marine veteran</div>
+        </div>
+      </div>
+    </div>
+    <div class="facts">
+      <div class="fact"><strong>2024 margin:</strong> +0.03% (187 votes)</div>
+      <div class="fact"><strong>Partisan lean:</strong> D+5</div>
+      <div class="fact"><strong>Top issues:</strong> water, farm economy</div>
+    </div>
+    <a href="#install" class="follow-cta">Install to follow CA-13 →</a>
+  </section>
+
+  <!-- DISTRICT 2: CA-22 -->
+  <section class="district" id="ca-22">
+    <div class="district-head">
+      <div class="district-id">CA-22</div>
+      <span class="rating-badge tossup">Toss-up</span>
+    </div>
+    <div class="district-geo">Central Valley · Bakersfield, Visalia, Hanford</div>
+    <p class="district-summary">
+      Republican incumbent <strong>David Valadao</strong> holds a seat where registered Democrats outnumber Republicans by 12 points. He voted to impeach Trump in 2021. Democrat <strong>Rudy Salas</strong>, a former state assemblyman, is running here for the third time. The latest poll shows Salas ahead by 4.2 points — within the margin of error.
+    </p>
+    <div class="mini-pair">
+      <div class="mini-cc dem">
+        <div class="mavatar">RS</div>
+        <div class="mbody">
+          <div class="mparty">Democrat</div>
+          <div class="mname">Rudy Salas</div>
+          <div class="mrole">Former State Assembly member</div>
+        </div>
+      </div>
+      <div class="mini-cc rep">
+        <div class="mavatar">DV</div>
+        <div class="mbody">
+          <div class="mparty">Republican (incumbent)</div>
+          <div class="mname">David Valadao</div>
+          <div class="mrole">Dairy farmer; in office since 2013</div>
+        </div>
+      </div>
+    </div>
+    <div class="facts">
+      <div class="fact"><strong>2024 margin:</strong> R +3.0%</div>
+      <div class="fact"><strong>Partisan lean:</strong> D+12</div>
+      <div class="fact"><strong>Latest poll:</strong> Salas +4.2</div>
+    </div>
+    <a href="#install" class="follow-cta">Install to follow CA-22 →</a>
+  </section>
+
+  <!-- DISTRICT 3: CA-27 -->
+  <section class="district" id="ca-27">
+    <div class="district-head">
+      <div class="district-id">CA-27</div>
+      <span class="rating-badge lean-r">Lean Rep</span>
+    </div>
+    <div class="district-geo">Northern LA County · Antelope Valley, Santa Clarita</div>
+    <p class="district-summary">
+      Republican incumbent <strong>Mike Garcia</strong>, a former Navy pilot, won this D+6 seat by 4.6 points in 2024. Democrat <strong>George Whitesides</strong>, a former NASA Chief of Staff and former CEO of Virgin Galactic, is challenging him. The latest polling shows a virtual tie.
+    </p>
+    <div class="mini-pair">
+      <div class="mini-cc dem">
+        <div class="mavatar">GW</div>
+        <div class="mbody">
+          <div class="mparty">Democrat</div>
+          <div class="mname">George Whitesides</div>
+          <div class="mrole">Former NASA Chief of Staff; ex-Virgin Galactic CEO</div>
+        </div>
+      </div>
+      <div class="mini-cc rep">
+        <div class="mavatar">MG</div>
+        <div class="mbody">
+          <div class="mparty">Republican (incumbent)</div>
+          <div class="mname">Mike Garcia</div>
+          <div class="mrole">Navy veteran; former Raytheon executive</div>
+        </div>
+      </div>
+    </div>
+    <div class="facts">
+      <div class="fact"><strong>2024 margin:</strong> R +4.6%</div>
+      <div class="fact"><strong>Partisan lean:</strong> D+6</div>
+      <div class="fact"><strong>Latest poll:</strong> Virtual tie</div>
+    </div>
+    <a href="#install" class="follow-cta">Install to follow CA-27 →</a>
+  </section>
+
+  <!-- DISTRICT 4: CA-41 -->
+  <section class="district" id="ca-41">
+    <div class="district-head">
+      <div class="district-id">CA-41</div>
+      <span class="rating-badge tossup">Toss-up</span>
+    </div>
+    <div class="district-geo">Riverside County · Palm Springs, Corona, Menifee</div>
+    <p class="district-summary">
+      A rematch of the 2024 race. Republican incumbent <strong>Ken Calvert</strong> has held this seat since 1993 and sits on House Appropriations. Democrat <strong>Will Rollins</strong>, a former federal prosecutor, lost by 4.8 points last time. Prop 50 shifted the district's partisan composition, and current polling shows a tied race.
+    </p>
+    <div class="mini-pair">
+      <div class="mini-cc dem">
+        <div class="mavatar">WR</div>
+        <div class="mbody">
+          <div class="mparty">Democrat</div>
+          <div class="mname">Will Rollins</div>
+          <div class="mrole">Former federal prosecutor</div>
+        </div>
+      </div>
+      <div class="mini-cc rep">
+        <div class="mavatar">KC</div>
+        <div class="mbody">
+          <div class="mparty">Republican (incumbent)</div>
+          <div class="mname">Ken Calvert</div>
+          <div class="mrole">In office since 1993; House Appropriations</div>
+        </div>
+      </div>
+    </div>
+    <div class="facts">
+      <div class="fact"><strong>2024 margin:</strong> R +4.8%</div>
+      <div class="fact"><strong>Partisan lean:</strong> D+1 (post-Prop 50)</div>
+      <div class="fact"><strong>Latest poll:</strong> Tied</div>
+    </div>
+    <a href="#install" class="follow-cta">Install to follow CA-41 →</a>
+  </section>
+
+  <!-- DISTRICT 5: CA-48 -->
+  <section class="district" id="ca-48">
+    <div class="district-head">
+      <div class="district-id">CA-48</div>
+      <span class="rating-badge lean-d2">Lean Dem</span>
+    </div>
+    <div class="district-geo">San Diego County · Escondido, San Marcos, Oceanside</div>
+    <p class="district-summary">
+      An open seat following the retirement of Republican Darrell Issa. Democrat <strong>Marni von Wilpert</strong>, a San Diego City Council member and former federal prosecutor, faces Republican <strong>Jim Desmond</strong>, a San Diego County Supervisor and former mayor of San Marcos. Prop 50 changed the district's partisan composition; Cook moved its rating in September.
+    </p>
+    <div class="mini-pair">
+      <div class="mini-cc dem">
+        <div class="mavatar">MV</div>
+        <div class="mbody">
+          <div class="mparty">Democrat</div>
+          <div class="mname">Marni von Wilpert</div>
+          <div class="mrole">San Diego City Council; former federal prosecutor</div>
+        </div>
+      </div>
+      <div class="mini-cc rep">
+        <div class="mavatar">JD</div>
+        <div class="mbody">
+          <div class="mparty">Republican</div>
+          <div class="mname">Jim Desmond</div>
+          <div class="mrole">SD County Supervisor; former Mayor of San Marcos</div>
+        </div>
+      </div>
+    </div>
+    <div class="facts">
+      <div class="fact"><strong>Prior holder:</strong> Darrell Issa (R, retired)</div>
+      <div class="fact"><strong>Cook update:</strong> Changed rating Sep 2026</div>
+      <div class="fact"><strong>Top issues:</strong> immigration, cost of living</div>
+    </div>
+    <a href="#install" class="follow-cta">Install to follow CA-48 →</a>
+  </section>
+
+  <!-- DISTRICT 6: CA-11 (special - D vs D) -->
+  <section class="district" id="ca-11">
+    <div class="district-head">
+      <div class="district-id">CA-11</div>
+      <span class="rating-badge lean-d">Dem vs. Dem</span>
+    </div>
+    <div class="district-geo">San Francisco · open seat</div>
+    <p class="district-summary">
+      Nancy Pelosi's seat is open for the first time since 1987. Under California's top-two primary, two Democrats advanced to the general election: State Senator <strong>Scott Wiener</strong> and San Francisco Supervisor <strong>Connie Chan</strong>. Wiener is generally described as the moderate; Chan as the progressive. The two have taken opposing positions on housing policy. Pelosi has endorsed Chan.
+    </p>
+    <div class="mini-pair">
+      <div class="mini-cc dem">
+        <div class="mavatar">SW</div>
+        <div class="mbody">
+          <div class="mparty">Democrat</div>
+          <div class="mname">Scott Wiener</div>
+          <div class="mrole">State Senator; housing &amp; LGBTQ legislation</div>
+        </div>
+      </div>
+      <div class="mini-cc dem">
+        <div class="mavatar">CC</div>
+        <div class="mbody">
+          <div class="mparty">Democrat</div>
+          <div class="mname">Connie Chan</div>
+          <div class="mrole">SF Supervisor; former Harris staffer</div>
+        </div>
+      </div>
+    </div>
+    <div class="facts">
+      <div class="fact"><strong>Primary:</strong> Wiener 40.7% · Chan 29.7%</div>
+      <div class="fact"><strong>Key split:</strong> housing policy</div>
+      <div class="fact"><strong>Endorsement:</strong> Pelosi → Chan</div>
+    </div>
+    <a href="#install" class="follow-cta">Install to follow CA-11 →</a>
+  </section>
+
+  <!-- LIVE ARTICLES -->
+  <section class="section">
+    <div class="kicker">What's happening today</div>
+    <h2>Live from the California races.</h2>
+    <p class="lead">Actual stories you'll see in your SmartNews California channel today.</p>
+    <div class="article-list">
+      <a class="article" href="#install">
+        <div class="thumb">📊</div>
+        <div class="body">
+          <div class="src">USC Today</div>
+          <div class="title">California House poll: Democrats hold slim leads in state's closest races</div>
+          <div class="meta">Yesterday · 6 min read</div>
+          <span class="article-cta">Install now to read →</span>
+        </div>
+      </a>
+      <a class="article" href="#install">
+        <div class="thumb">🗳️</div>
+        <div class="body">
+          <div class="src">CalMatters</div>
+          <div class="title">CA-13 ad spending tops $40M as Gray-Lincoln rematch intensifies</div>
+          <div class="meta">2 hours ago · 5 min read</div>
+          <span class="article-cta">Install now to read →</span>
+        </div>
+      </a>
+      <a class="article" href="#install">
+        <div class="thumb">🏛️</div>
+        <div class="body">
+          <div class="src">Politico California</div>
+          <div class="title">Valadao's Trump-impeachment vote: an asset or a liability in CA-22?</div>
+          <div class="meta">3 days ago · 7 min read</div>
+          <span class="article-cta">Install now to read →</span>
+        </div>
+      </a>
+      <a class="article" href="#install">
+        <div class="thumb">🗺️</div>
+        <div class="body">
+          <div class="src">Cook Political Report</div>
+          <div class="title">California's newly passed map spurs 11 ratings changes nationwide</div>
+          <div class="meta">1 week ago · 8 min read</div>
+          <span class="article-cta">Install now to read →</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- VALUE PROPS -->
+  <section class="section" style="background: var(--sn-surface);">
+    <div class="kicker">Built for engaged voters</div>
+    <h2>Follow six races at once.</h2>
+    <p class="lead">Tap a district. Get everything that happens there — automatically.</p>
+    <div class="value-grid">
+      <div class="value-card">
+        <div class="icon">🔔</div>
+        <h3>Race-level alerts</h3>
+        <p>Follow by district. Get a push when polling shifts, a candidate pulls out, or returns start to come in.</p>
+      </div>
+      <div class="value-card">
+        <div class="icon">⚖️</div>
+        <h3>Multiple perspectives</h3>
+        <p>CalMatters, Politico, LA Times, Cook, local papers — the same race, every angle, one tap.</p>
+      </div>
+      <div class="value-card">
+        <div class="icon">📋</div>
+        <h3>Your full ballot</h3>
+        <p>Governor, 52 House races, state legislature, and 14 propositions — all in one place.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PUBLISHERS -->
+  <section class="section">
+    <div class="kicker">Sources we curate</div>
+    <h2>Every California voice, one feed.</h2>
+    <div class="publishers">
+      <div class="publisher">CalMatters</div>
+      <div class="publisher">LA Times</div>
+      <div class="publisher">SF Chronicle</div>
+      <div class="publisher">Politico California</div>
+      <div class="publisher">Cook Political Report</div>
+      <div class="publisher">KQED</div>
+      <div class="publisher">The Sacramento Bee</div>
+      <div class="publisher">Ballotpedia</div>
+      <div class="publisher">USC Today</div>
+      <div class="publisher">+ 40 more</div>
+    </div>
+  </section>
+
+  <!-- Phone showcase (moved below publishers) -->
+  <section class="phone-showcase">
+    <div class="kicker">SmartNews on your phone</div>
+    <h2>Six races. One feed.</h2>
+    <div class="phone-frame">
+      <img src="https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/0a/8c/86/0a8c8611-b187-2cdc-6beb-5152eaba5fa6/052626_ASO_Frame3_v2_GR_1242x2208.jpg/828x1792bb.png" alt="SmartNews app screenshot">
+    </div>
+    <p class="caption">Follow candidates. Debate alerts. Poll updates. iOS &amp; Android.</p>
+  </section>
+
+  <!-- Nonpartisan disclosure -->
+  <div class="nonpartisan">
+    <strong>About this page:</strong> Nonpartisan, independently produced. Race ratings reflect Cook Political Report as of September 25, 2026. Partisan lean is Dave's Redistricting Act (DRA) composite. Candidate information drawn from Ballotpedia, CalMatters, and campaign filings. We do not endorse any candidate. Last updated 2026-10-08.
+  </div>
+
+  <!-- FINAL CTA -->
+  <section id="install" class="cta-block">
+    <h2>Don't miss the races that decide the 2026 House.</h2>
+    <p>Free forever. Install in 20 seconds.</p>
+    <div class="cta-row">
+      <a href="#install" class="store-btn primary">Get SmartNews — Free</a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>&copy; 2026 SmartNews, Inc. &nbsp;·&nbsp;
+      <a href="#">Privacy</a> &nbsp;·&nbsp;
+      <a href="#">Terms</a> &nbsp;·&nbsp;
+      <a href="#">All topics</a>
+    </p>
+  </footer>
+
+</div>
+<script src="_lp.js"></script>
+<script>fetchAndRender('ca-house');</script>
+</body>
+</html>
