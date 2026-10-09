@@ -170,13 +170,13 @@
 
   <!-- HERO -->
   <section class="hero">
-    <div class="badge">🏛️ 2026 CA House</div>
+    <div class="badge">🏛️ 2026 CA · U.S. House</div>
     <h1>6 California races<br>to watch in 2026.</h1>
-    <p class="sub">Proposition 50 redrew California's congressional map this year, shifting the partisan balance of several seats. These are the 6 races rated as competitive — among the most of any state. Nonpartisan.</p>
+    <p class="sub">After a flurry of redistricting efforts in other states, Proposition 50 redrew California's congressional map this year. These are the 6 races rated as competitive — among the most of any state.</p>
     <div class="cta-row">
       <a href="#install" class="store-btn primary">Get SmartNews — Free</a>
     </div>
-    <p style="font-size:12px;color:var(--sn-ink);opacity:0.55;margin-top:10px;">Follow every race · Debate alerts · iOS &amp; Android</p>
+    <p style="font-size:12px;color:var(--sn-ink);opacity:0.55;margin-top:10px;">Debate alerts · Poll updates · Candidate news · iOS &amp; Android</p>
 
     <!-- Stakes row -->
     <div class="stakes">
@@ -471,8 +471,8 @@
     <div class="value-grid">
       <div class="value-card">
         <div class="icon">🔔</div>
-        <h3>Race-level alerts</h3>
-        <p>Follow by district. Get a push when polling shifts, a candidate pulls out, or returns start to come in.</p>
+        <h3>Race alerts</h3>
+        <p>Set alerts on candidates and topics you care about. Get notified when polls shift, candidates make news, or returns come in.</p>
       </div>
       <div class="value-card">
         <div class="icon">⚖️</div>
@@ -512,7 +512,7 @@
     <div class="phone-frame">
       <img src="https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/0a/8c/86/0a8c8611-b187-2cdc-6beb-5152eaba5fa6/052626_ASO_Frame3_v2_GR_1242x2208.jpg/828x1792bb.png" alt="SmartNews app screenshot">
     </div>
-    <p class="caption">Follow candidates. Debate alerts. Poll updates. iOS &amp; Android.</p>
+    <p class="caption">Debate alerts · Poll updates · Candidate news. iOS &amp; Android.</p>
   </section>
 
   <!-- Nonpartisan disclosure -->
@@ -539,6 +539,9 @@
 
 </div>
 <script src="_lp.js"></script>
-<script>fetchAndRender('ca-house');</script>
+<!-- fetchAndRender disabled: using hard-coded election-themed mock articles.
+     Google Sheet does not yet have a 'ca-house' tab; the previous fetch
+     was falling back to unrelated topic data. Re-enable once sheet exists. -->
+<!-- <script>fetchAndRender('ca-house');</script> -->
 </body>
 </html>
