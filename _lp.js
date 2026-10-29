@@ -21,6 +21,18 @@ function _detectPlatform() {
   return 'other';
 }
 
+function _storeOverride() {
+  // LP が <meta name="w2a-ios-ppid" content="..."> / <meta name="w2a-android-listing" content="...">
+  // を宣言していれば、Adjust tracker URL に ppid (iOS CPP) / listing (Android Custom Store Listing) を乗せる。
+  // Adjust は未知の query param を destination store URL に pass-through するため、
+  // 結果として iOS App Store は CPP を、Google Play は Custom Store Listing を開く。
+  const q = (name) => (document.querySelector(`meta[name="${name}"]`) || {}).content || '';
+  return {
+    ios_ppid: q('w2a-ios-ppid'),
+    android_listing: q('w2a-android-listing'),
+  };
+}
+
 function _installUrl() {
   const p = _detectPlatform();
   const base = ADJUST_URLS[p];
@@ -30,6 +42,9 @@ function _installUrl() {
   const forward = ['wbraid', 'gclid', 'campaign', 'adgroup', 'creative', 'external_click_id'];
   const kept = new URLSearchParams();
   forward.forEach(k => { const v = src.get(k); if (v) kept.set(k, v); });
+  const ov = _storeOverride();
+  if (p === 'ios' && ov.ios_ppid) kept.set('ppid', ov.ios_ppid);
+  if (p === 'android' && ov.android_listing) kept.set('listing', ov.android_listing);
   const suffix = kept.toString();
   return suffix ? `${base}?${suffix}` : base;
 }
